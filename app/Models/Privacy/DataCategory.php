@@ -1,23 +1,19 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models\Privacy;
 
-return new class extends Migration {
-    public function up(): void
-    {
-        Schema::create('data_categories', function (Blueprint $table) {
-            $table->bigIncrements('data_cat_id'); // primary key auto-incremental
-            $table->string('code', 10)->unique();  // código único
-            $table->string('name');                // nombre
-            $table->boolean('is_sensitive')->default(false); // sensible, default false
-            $table->text('description')->nullable(); // descripción opcional
-        });
-    }
+use Illuminate\Database\Eloquent\Model;
 
-    public function down(): void
-    {
-        Schema::dropIfExists('data_categories');
-    }
-};
+class DataCategory extends Model
+{
+    protected $table = 'privacy.data_category';
+    protected $primaryKey = 'data_cat_id';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'code',
+        'name',
+        'is_sensitive',
+        'description',
+    ];
+}

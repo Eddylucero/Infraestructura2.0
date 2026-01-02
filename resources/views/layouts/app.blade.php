@@ -116,7 +116,7 @@
         [
             'label' => 'TRAINING',
             'items' => [
-                ['label' => 'Cursos', 'href' => '/training/courses', 'key' => 'courses'],
+                ['label' => 'Paises', 'href' => route('privacy.country.index'), 'key' => 'country'],
                 ['label' => 'Asignaciones', 'href' => '/training/assignments', 'key' => 'assignments'],
                 ['label' => 'Resultados',   'href' => '/training/results',    'key' => 'results'],
 

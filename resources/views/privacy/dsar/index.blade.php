@@ -19,6 +19,9 @@
 
 @section('content')
 
+{{-- Font Awesome --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
 <div class="bg-white border rounded divide-y">
 
 @forelse($dsars as $d)
@@ -53,14 +56,14 @@
         <div class="flex gap-2">
             <!-- Botón Editar -->
             <a href="{{ route('dsar.edit', $d) }}"
-               class="w-9 h-9 flex items-center justify-center rounded bg-yellow-500 hover:bg-yellow-600 text-white text-lg font-bold">
-               ✏️
+               class="w-9 h-9 flex items-center justify-center rounded bg-yellow-500 hover:bg-yellow-600 text-white text-lg">
+               <i class="fas fa-pencil"></i>
             </a>
 
             <!-- Botón Agregar Evidencia -->
             <a href="{{ route('dsar.edit', $d) }}#evidences"
-               class="w-9 h-9 flex items-center justify-center rounded bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold">
-               📎
+               class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded flex items-center gap-2 text-sm">
+               <i class="fas fa-plus"></i> Evidencia
             </a>
         </div>
     </div>

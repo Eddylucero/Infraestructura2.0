@@ -36,12 +36,12 @@ class DsarRequestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'subject_id' => 'required|exists:data_subject,subject_id',
+            'subject_id' => 'required|exists:' . DataSubject::class . ',subject_id',
             'request_type' => 'required|string|max:50',
             'channel' => 'required|string|max:50',
             'received_at' => 'required|date',
             'due_at' => 'required|date|after_or_equal:received_at',
-            'assigned_to_user_id' => 'nullable|exists:app_user,user_id',
+            'assigned_to_user_id' => 'nullable|exists:' . AppUser::class . ',user_id',
         ]);
 
         $dsar = DsarRequest::create([
@@ -78,7 +78,7 @@ class DsarRequestController extends Controller
             'channel' => 'required|string|max:50',
             'due_at' => 'required|date',
             'status' => 'required|in:PENDING,IN_PROGRESS,CLOSED',
-            'assigned_to_user_id' => 'nullable|exists:app_user,user_id',
+            'assigned_to_user_id' => 'nullable|exists:' . AppUser::class . ',user_id',
             'resolution_summary' => 'nullable|string',
         ]);
 
@@ -97,4 +97,3 @@ class DsarRequestController extends Controller
             ->with('exito', 'Solicitud DSAR actualizada');
     }
 }
-

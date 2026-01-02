@@ -22,6 +22,7 @@ use App\Http\Controllers\Privacyfase4\DataStoreController;
 use App\Http\Controllers\Privacyfase4\RecipientController;
 
 use App\Http\Controllers\Document\DocumentController;
+use App\Http\Controllers\Privacy\CountryController;
 
 Route::get('/', function () {
     return view('core/extencion');
@@ -160,3 +161,7 @@ Route::post('documents/{document}/versions/{version}/activate', [DocumentControl
 Route::get('documents/{document}/versions/{version}/download', [DocumentController::class, 'downloadVersion'])
     ->name('documents.versions.download');
 
+// Country
+Route::prefix('privacy')->name('privacy.')->group(function() {
+    Route::resource('country', CountryController::class);
+});

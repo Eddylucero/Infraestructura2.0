@@ -51,6 +51,9 @@
     <a href="{{ route('systems.create') }}" class="btn btn-primary mb-3">
         Nuevo Sistema
     </a>
+    <a href="{{ route('data-stores.index') }}" class="btn btn-sm btn-success">
+        Datos del Almacén
+    </a>
 
     @if($systems->count() > 0)
         <table class="table table-bordered table-striped">

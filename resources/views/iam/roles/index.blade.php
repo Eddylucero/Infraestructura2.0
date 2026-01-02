@@ -34,6 +34,18 @@
         </div>
     @endif
 
+    <!-- Agregar este código para mostrar errores -->
+    @if(session('error'))
+        <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                </svg>
+                {{ session('error') }}
+            </div>
+        </div>
+    @endif
+
     <!-- Tarjeta principal -->
     <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <!-- Encabezado tabla -->
@@ -252,6 +264,18 @@ document.addEventListener('click', function(event) {
         event.preventDefault();
         const form = event.target.closest('form');
         const roleName = event.target.closest('tr').querySelector('.font-bold').textContent;
+        const permissionsCount = parseInt(event.target.closest('tr').querySelector('.bg-blue-100').textContent);
+        // Verificar si tiene permisos asignados
+        if (permissionsCount > 0) {
+            Swal.fire({
+                title: 'No se puede eliminar',
+                html: `El rol <strong>"${roleName}"</strong> tiene ${permissionsCount} permiso(s) asignado(s).`,
+                icon: 'error',
+                confirmButtonColor: '#3b82f6',
+                confirmButtonText: 'Entendido'
+            });
+            return; // No proceder con la eliminación
+        }
         
         Swal.fire({
             title: '¿Eliminar rol?',

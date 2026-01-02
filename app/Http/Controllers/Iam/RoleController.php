@@ -147,8 +147,16 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         $role = Role::findOrFail($id);
+    
+        // Validar si el rol tiene permisos asignados
+        if ($role->permissions()->exists()) {
+            return redirect()->route('roles.index')
+                ->with('error', 'No se puede eliminar el rol porque tiene permisos asignados.');
+        }
+        
         $role->delete();
         
-        return redirect()->route('roles.index')->with('message', 'Rol eliminado exitosamente');
+        return redirect()->route('roles.index')
+            ->with('message', 'Rol eliminado exitosamente');
     }
 }

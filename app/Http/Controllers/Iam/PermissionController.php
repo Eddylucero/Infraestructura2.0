@@ -132,8 +132,16 @@ class PermissionController extends Controller
     public function destroy(string $id)
     {
         $permission = Permission::findOrFail($id);
+    
+        // Validar si el permiso está asignado a roles
+        if ($permission->roles()->exists()) {
+            return redirect()->route('permissions.index')
+                ->with('error', 'No se puede eliminar el permiso porque está asignado a roles.');
+        }
+        
         $permission->delete();
         
-        return redirect()->route('permissions.index')->with('message', 'Permiso eliminado exitosamente');
+        return redirect()->route('permissions.index')
+            ->with('message', 'Permiso eliminado exitosamente');
     }
 }
